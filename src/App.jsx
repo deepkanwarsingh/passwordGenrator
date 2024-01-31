@@ -1,4 +1,4 @@
-import { useState,useCallback,useEffect} from 'react'
+import { useState,useCallback,useEffect,useRef} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -29,6 +29,12 @@ function App() {
       passwordGenrator()
     },[length,numberAllowed,charAllowed,passwordGenrator])
  
+    const copyPasswordToClipboard = useCallback(() => {
+     
+      window.navigator.clipboard.writeText(password)
+    }, [password])
+  
+
   return (
     <>
  
@@ -45,6 +51,7 @@ function App() {
             readOnly
         />
           <button
+           onClick={copyPasswordToClipboard}
            className='outline-none bg-blue-700 text-white px-3 py-0.5 shrink-0'
           >copy</button>
 
